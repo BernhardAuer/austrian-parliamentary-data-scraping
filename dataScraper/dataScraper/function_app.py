@@ -18,3 +18,4 @@ def main():
     process = CrawlerProcess(settings)
     process.crawl(NationalCouncilMeetingSpider)
     process.start() # the script will block here until the crawling is finished
+#test
