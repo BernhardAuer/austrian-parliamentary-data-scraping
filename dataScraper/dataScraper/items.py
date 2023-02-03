@@ -4,16 +4,21 @@
 # https://docs.scrapy.org/en/latest/topics/items.html
 
 import scrapy
+from dateutil.parser import parse
+from itemloaders.processors import MapCompose, TakeFirst
 
+def parseDate(dateString):
+     dateTime = parse(dateString)
+     return dateTime
 
 class NationalCouncilMeetingItem(scrapy.Item):
-    name = scrapy.Field() # 199. Sitzung
-    date = scrapy.Field() # 01.02.2023
-    legislativePeriod  = scrapy.Field() # XXVII
-    meetingType = scrapy.Field() # NRSTIZ or ...
-    dateOtherFormat = scrapy.Field() # 20230201
-    meetingNumber = scrapy.Field() # 00199
-    meetingDay = scrapy.Field() # 1
-    link = scrapy.Field()
-
-    pass
+     name = scrapy.Field(output_processor = TakeFirst()) # 199. Sitzung
+     date = scrapy.Field(input_processor = MapCompose(parseDate), output_processor = TakeFirst()) # 01.02.2023
+     legislativePeriod  = scrapy.Field(output_processor = TakeFirst()) # XXVII
+     meetingType = scrapy.Field(output_processor = TakeFirst()) # NRSTIZ or ...
+     dateOtherFormat = scrapy.Field(output_processor = TakeFirst()) # 20230201
+     meetingNumber = scrapy.Field(output_processor = TakeFirst()) # 00199
+     meetingDay = scrapy.Field(output_processor = TakeFirst()) # 1
+     link = scrapy.Field(output_processor = TakeFirst())
+ 
+     pass

@@ -3,6 +3,7 @@ from pathlib import Path
 import scrapy
 import json
 from dataScraper.items import NationalCouncilMeetingItem
+from scrapy.loader import ItemLoader
 
 
 class NationalCouncilMeetingSpider(scrapy.Spider):
@@ -13,20 +14,20 @@ class NationalCouncilMeetingSpider(scrapy.Spider):
             return [scrapy.FormRequest(self.search_url,
                                     formdata={},
                                     method="POST",
-                                    callback=self.test)]
-
-    def parse(self, response):
-        yield scrapy.Request(self.search_url, callback=self.test, method="POST")
+                                    callback=self.parsePostData)]
 
     
-    def test(self, response):
+    def parsePostData(self, response):
         results = json.loads(response.body)
-        item = NationalCouncilMeetingItem()
 
         for meeting in results['rows']:
-            try:
-                item['name'] = meeting[1]
-                item['date'] = meeting[0]
-            except:
-                continue
-            yield item
+            l = ItemLoader(item=NationalCouncilMeetingItem(), selector=meeting)
+            l.add_value('name', meeting[1])
+            l.add_value('date', meeting[7])
+            l.add_value('legislativePeriod', meeting[3])
+            l.add_value('meetingType', meeting[4])
+            l.add_value('meetingNumber', meeting[5])
+            l.add_value('meetingDay', meeting[9])
+            l.add_value('link', meeting[10])
+            
+            yield l.load_item()
