@@ -11,8 +11,11 @@ def parseDate(dateString):
      dateTime = parse(dateString)
      return dateTime
 
+def stripString(value):
+     return value.strip()
+
 class NationalCouncilMeetingItem(scrapy.Item):
-     name = scrapy.Field(output_processor = TakeFirst()) # 199. Sitzung
+     name = scrapy.Field(input_processor = MapCompose(stripString), output_processor = TakeFirst()) # 199. Sitzung
      date = scrapy.Field(input_processor = MapCompose(parseDate), output_processor = TakeFirst()) # 20230201
      legislativePeriod  = scrapy.Field(output_processor = TakeFirst()) # XXVII
      meetingType = scrapy.Field(output_processor = TakeFirst()) # NRSTIZ or ...
