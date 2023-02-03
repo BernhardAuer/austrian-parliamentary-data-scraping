@@ -1,21 +1,30 @@
-from spiders.NationalCouncilMeeting_spider import NationalCouncilMeetingSpider
-from pipelines import MongoDBPipeline
+import azure.functions as func
+import logging
 
-from pymongo import MongoClient
+app = func.FunctionApp()
 
-import scrapy
-import azure.functions
-from scrapy.crawler import CrawlerProcess
-from scrapy.utils.project import get_project_settings
+# Learn more at aka.ms/pythonprogrammingmodel
 
-# https://victorsanner.nl/azure/scraping/container/instances/docker/2022/04/25/cheap-and-easy-scraping-using-scrapy-docker-and-azure-container-instances.html
+# Get started by running the following code to create a function using a HTTP trigger.
 
-settings = get_project_settings()
-
-#this is where we start the scraper 
 @app.function_name(name="HttpTrigger1")
-def main():
-    process = CrawlerProcess(settings)
-    process.crawl(NationalCouncilMeetingSpider)
-    process.start() # the script will block here until the crawling is finished
-#test
+@app.route(route="hello")
+def test_function(req: func.HttpRequest) -> func.HttpResponse:
+     logging.info('Python HTTP trigger function processed a request.')
+
+     name = req.params.get('name')
+     if not name:
+        try:
+            req_body = req.get_json()
+        except ValueError:
+            pass
+        else:
+            name = req_body.get('name')
+
+     if name:
+        return func.HttpResponse(f"Hello, {name}. This HTTP triggered function executed successfully.")
+     else:
+        return func.HttpResponse(
+             "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.",
+             status_code=200
+        )
