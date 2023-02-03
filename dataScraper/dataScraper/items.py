@@ -8,7 +8,7 @@ from dateutil.parser import parse
 from itemloaders.processors import MapCompose, TakeFirst
 
 def parseDate(dateString):
-     dateTime = parse(dateString)
+     dateTime = parse(dateString).replace(microsecond=0) # this replace shitty thing is needed for mongodb (js dates only, huh)
      return dateTime
 
 def stripString(value):
