@@ -6,7 +6,14 @@
 import scrapy
 
 
-class DatascraperItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
+class NationalCouncilMeetingItem(scrapy.Item):
+    name = scrapy.Field() # 199. Sitzung
+    date = scrapy.Field() # 01.02.2023
+    legislativePeriod  = scrapy.Field() # XXVII
+    meetingType = scrapy.Field() # NRSTIZ or ...
+    dateOtherFormat = scrapy.Field() # 20230201
+    meetingNumber = scrapy.Field() # 00199
+    meetingDay = scrapy.Field() # 1
+    link = scrapy.Field()
+
     pass
