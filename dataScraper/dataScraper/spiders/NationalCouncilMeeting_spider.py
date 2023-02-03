@@ -2,9 +2,8 @@ from pathlib import Path
 
 import scrapy
 import json
-from dataScraper.items import NationalCouncilMeetingItem
+from items import NationalCouncilMeetingItem
 from scrapy.loader import ItemLoader
-
 
 class NationalCouncilMeetingSpider(scrapy.Spider):
     name = "nationalCouncilMeeting"
@@ -32,3 +31,4 @@ class NationalCouncilMeetingSpider(scrapy.Spider):
             l.add_value('link', meeting[10])
             
             yield l.load_item()
+
