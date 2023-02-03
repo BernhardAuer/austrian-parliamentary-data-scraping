@@ -4,6 +4,7 @@ from pipelines import MongoDBPipeline
 from pymongo import MongoClient
 
 import scrapy
+import azure.functions
 from scrapy.crawler import CrawlerProcess
 from scrapy.utils.project import get_project_settings
 
@@ -12,9 +13,8 @@ from scrapy.utils.project import get_project_settings
 settings = get_project_settings()
 
 #this is where we start the scraper 
-def scrape():
+@app.function_name(name="HttpTrigger1")
+def main():
     process = CrawlerProcess(settings)
     process.crawl(NationalCouncilMeetingSpider)
     process.start() # the script will block here until the crawling is finished
-
-scrape()
