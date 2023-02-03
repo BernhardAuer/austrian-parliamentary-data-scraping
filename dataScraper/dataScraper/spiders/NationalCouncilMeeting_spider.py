@@ -21,6 +21,7 @@ class NationalCouncilMeetingSpider(scrapy.Spider):
         results = json.loads(response.body)
 
         for meeting in results['rows']:
+            # todo: maybe use jmespath?
             l = ItemLoader(item=NationalCouncilMeetingItem(), selector=meeting)
             l.add_value('name', meeting[1])
             l.add_value('date', meeting[7])
