@@ -3,3 +3,7 @@
 # Manually managing azure-functions-worker may cause unexpected issues
 
 azure-functions
+scrapy==2.8.0
+pathlib==1.0.1
+pymongo==4.3.3
+itemloaders==1.0.6
