@@ -13,12 +13,11 @@ def parseDate(dateString):
 
 class NationalCouncilMeetingItem(scrapy.Item):
      name = scrapy.Field(output_processor = TakeFirst()) # 199. Sitzung
-     date = scrapy.Field(input_processor = MapCompose(parseDate), output_processor = TakeFirst()) # 01.02.2023
+     date = scrapy.Field(input_processor = MapCompose(parseDate), output_processor = TakeFirst()) # 20230201
      legislativePeriod  = scrapy.Field(output_processor = TakeFirst()) # XXVII
      meetingType = scrapy.Field(output_processor = TakeFirst()) # NRSTIZ or ...
-     dateOtherFormat = scrapy.Field(output_processor = TakeFirst()) # 20230201
-     meetingNumber = scrapy.Field(output_processor = TakeFirst()) # 00199
-     meetingDay = scrapy.Field(output_processor = TakeFirst()) # 1
+     meetingNumber = scrapy.Field(input_processor = MapCompose(int), output_processor = TakeFirst()) # 00199
+     meetingDay = scrapy.Field(input_processor = MapCompose(int), output_processor = TakeFirst()) # 1
      link = scrapy.Field(output_processor = TakeFirst())
  
      pass
