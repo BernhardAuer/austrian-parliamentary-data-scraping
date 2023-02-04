@@ -1,0 +1,12 @@
+# Start from python slim-buster docker image, change python version as desired.
+FROM python:latest
+RUN apt-get update
+# Copy files to working directory
+COPY ./ /app/
+WORKDIR /app 
+
+# Install your dependencies from requirements.txt
+RUN pip install -r requirements.txt
+
+# Run scrapy - the container will exit when this finishes!
+CMD python scrapeScript.py
