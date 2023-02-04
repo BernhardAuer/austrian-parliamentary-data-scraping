@@ -21,11 +21,8 @@ class MongoDBPipeline:
     @classmethod
     def from_crawler(cls, crawler):
         return cls(
-        #     mongodb_uri=crawler.settings.get('MONGODB_URI'),
-        #     mongodb_db=crawler.settings.get('MONGODB_DATABASE', 'items')
-        # todo: remove credentials from here!!
-            mongodb_uri='mongodb://austrian-parliamentary-data-scraping-prod:wyhFcbvlCwveGi9KvxynEwCbLeg6pXzZEonFOUq6ljEu7UHx6R3ayA9IjDpYEP8trnIMRNTvAwuoACDb1DxoyA==@austrian-parliamentary-data-scraping-prod.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@austrian-parliamentary-data-scraping-prod@',
-            mongodb_db='austrianParliamentaryDataScraping',
+            mongodb_uri=crawler.settings.get('MONGODB_URI'),
+            mongodb_db=crawler.settings.get('MONGODB_DATABASE')
         )
 
     def open_spider(self, spider):
