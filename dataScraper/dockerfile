@@ -6,7 +6,7 @@ COPY ./ /app/
 WORKDIR /app 
 
 # Install your dependencies from requirements.txt
-RUN pip install -r ./dataScraper/requirements.txt
+RUN pip install -r requirements.txt
 
 # Run scrapy - the container will exit when this finishes!
 CMD python ./dataScraper/scrapeScript.py
