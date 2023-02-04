@@ -6,7 +6,7 @@ from items import NationalCouncilMeetingItem
 from scrapy.loader import ItemLoader
 
 class NationalCouncilMeetingSpider(scrapy.Spider):
-    name = "nationalCouncilMeeting"
+    name = "nationalCouncilMeetings"
     search_url = 'https://www.parlament.gv.at/Filter/api/json/post?jsMode=EVAL&FBEZ=WFP_007&listeId=11070&showAll=true&export=true'
 
     def start_requests(self):

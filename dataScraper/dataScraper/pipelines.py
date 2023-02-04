@@ -10,9 +10,7 @@ from items import NationalCouncilMeetingItem
 from itemadapter import ItemAdapter
 
 class MongoDBPipeline:
-
-    collection = 'nationalCouncilMeetings'
-
+    
     def __init__(self, mongodb_uri, mongodb_db):
         self.mongodb_uri = mongodb_uri
         self.mongodb_db = mongodb_db
@@ -29,12 +27,12 @@ class MongoDBPipeline:
         self.client = pymongo.MongoClient(self.mongodb_uri)
         self.db = self.client[self.mongodb_db]
         # Start with a clean database
-        self.db[self.collection].delete_many({})
+        self.db[spider.name].delete_many({})
 
     def close_spider(self, spider):
         self.client.close()
 
     def process_item(self, item, spider):
-        data = dict(NationalCouncilMeetingItem(item))
-        self.db[self.collection].insert_one(data)
+        data = dict(item)
+        self.db[spider.name].insert_one(data)
         return item
