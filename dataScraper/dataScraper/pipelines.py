@@ -32,9 +32,7 @@ class MongoDBPipeline:
     def close_spider(self, spider):
         self.client.close()
 
-    def process_item(self, item, spider):
-        # set default values... this is a quick fix, there must be a better way to do this...
-        item.setdefault('isVoluntaryTimeLimit', False)        
+    def process_item(self, item, spider):    
         data = dict(item)
         self.db[spider.name].insert_one(data)
         return item

@@ -24,6 +24,7 @@ class SpeechesMetaDataSpider(scrapy.Spider):
 
             speeches = search('speeches', singleDebate)
             for singleSpeech in speeches:
+                isVoluntaryTimeLimit = singleSpeech[9] if singleSpeech[9] != None else 'unfreiwillig lol' # quick fix, there must be a better solution for null values
                 l = ItemLoader(item=SpeechesMetaDataItem(), meetingDate = meetingDate, selector=singleSpeech)
                 l.add_value('nameOfSpeaker', singleSpeech[2])
                 l.add_value('nrOfSpeechInDebate', singleSpeech[0])
@@ -31,7 +32,7 @@ class SpeechesMetaDataSpider(scrapy.Spider):
                 l.add_value('typeOfSpeech', singleSpeech[5])
                 l.add_value('startDateTime', singleSpeech[6])
                 l.add_value('timeLimitInSec', singleSpeech[8])
-                l.add_value('isVoluntaryTimeLimit', singleSpeech[9])
+                l.add_value('isVoluntaryTimeLimit', isVoluntaryTimeLimit)
                 l.add_value('lengthOfSpeechInSec', singleSpeech[7])
                 l.add_value('nationalCouncilMeetingTitle', nationalCouncilMeetingTitle)
                 l.add_value('topic', topic)
