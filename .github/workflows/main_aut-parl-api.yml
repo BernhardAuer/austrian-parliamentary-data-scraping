@@ -3,6 +3,10 @@
 
 name: Build and deploy ASP.Net Core app to Azure Web App - aut-parl-api
 
+defaults:
+  run:
+    working-directory: ./Backend
+
 on:
   push:
     branches:
