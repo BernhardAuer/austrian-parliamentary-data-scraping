@@ -3,3 +3,4 @@ pathlib==1.0.1
 pymongo==4.3.3
 itemloaders==1.0.6
 python-dateutil==2.8.2
+jmespath==1.0.1
