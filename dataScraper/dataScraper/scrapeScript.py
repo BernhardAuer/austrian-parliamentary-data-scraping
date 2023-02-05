@@ -1,4 +1,5 @@
 from spiders.NationalCouncilMeeting_spider import NationalCouncilMeetingSpider
+from spiders.SpeechesMetaData_spider import SpeechesMetaDataSpider
 import scrapy
 from scrapy.crawler import CrawlerProcess
 from scrapy.utils.project import get_project_settings
@@ -26,7 +27,7 @@ def scrape():
             customSettings = settings._to_dict() | overridenSettings
 
     process = CrawlerProcess(customSettings)
-    process.crawl(NationalCouncilMeetingSpider)
+    process.crawl(SpeechesMetaDataSpider)
     process.start() # the script will block here until the crawling is finished
 
 scrape()
