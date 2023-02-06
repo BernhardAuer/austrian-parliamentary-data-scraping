@@ -6,7 +6,7 @@ name: Backend build + deploy  (Azure Web App aut-parl-api)
 on:
   push:
     paths:
-      - ./Backend
+    - 'Backend/**'
     branches:
       - main
   workflow_dispatch:
