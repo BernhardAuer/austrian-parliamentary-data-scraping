@@ -3,7 +3,7 @@ name: Frontend build + deploy (Azure Static Web App gray-bay)
 on:
   push:
     paths:
-      - ./frontend
+    - 'frontend/**'
     branches:
       - main
   pull_request:
