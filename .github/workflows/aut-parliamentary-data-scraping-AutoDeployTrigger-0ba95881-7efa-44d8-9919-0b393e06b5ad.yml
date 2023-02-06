@@ -1,4 +1,4 @@
-name: Trigger auto deployment for aut-parliamentary-data-scraping
+name: dataScraper build + deploy (Azure Container Registry + App)
 
 # When this action will be executed
 on:

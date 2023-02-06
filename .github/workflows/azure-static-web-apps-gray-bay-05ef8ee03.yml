@@ -1,13 +1,16 @@
-name: Azure Static Web Apps CI/CD
+name: Frontend build + deploy (Azure Static Web App gray-bay)
 
 on:
   push:
+    paths:
+      - ./frontend
     branches:
       - main
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   build_and_deploy_job:
