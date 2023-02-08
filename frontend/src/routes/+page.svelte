@@ -1,7 +1,7 @@
 <script>
 	import { ApiClient } from './../javascript-client-generated/src/ApiClient.js';
 	import { WeatherForecastApi } from './../javascript-client-generated/src/api/WeatherForecastApi.js';
- import { PUBLIC_API_URL } from '$env/static/public';
+  import { env } from '$env/dynamic/public'
 // import {WebApi} from 'web_api';
 
 // let apiInstance = new WebApi.WeatherForecastApi();
@@ -15,7 +15,7 @@
 
 
 var client = new ApiClient();
-client.basePath = PUBLIC_API_URL;
+client.basePath = env.PUBLIC_API_URL;
 let apiInstance = new WeatherForecastApi(client);
 let dataToShow = "da is no nix gladen";
 function test(){
