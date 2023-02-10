@@ -14,7 +14,7 @@
  */
 import {ApiClient} from './ApiClient';
 import {SpeechesMetaData} from './model/SpeechesMetaData';
-import {WeatherForecastApi} from './api/WeatherForecastApi';
+import {SpeechesMetaDataApi} from './api/SpeechesMetaDataApi';
 
 /**
 * Object.<br>
@@ -47,7 +47,7 @@ import {WeatherForecastApi} from './api/WeatherForecastApi';
 * @module index
 * @version 1.0
 */
-export default {
+export {
     /**
      * The ApiClient constructor.
      * @property {module:ApiClient}
@@ -61,8 +61,8 @@ export default {
     SpeechesMetaData,
 
     /**
-    * The WeatherForecastApi service constructor.
-    * @property {module:api/WeatherForecastApi}
+    * The SpeechesMetaDataApi service constructor.
+    * @property {module:api/SpeechesMetaDataApi}
     */
-    WeatherForecastApi
+    SpeechesMetaDataApi
 };
