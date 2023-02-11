@@ -70,7 +70,7 @@ Please follow the [installation](#installation) instruction and execute the foll
 ```javascript
 var WebApi = require('web_api');
 
-var api = new WebApi.WeatherForecastApi()
+var api = new WebApi.SpeechesMetaDataApi()
 var callback = function(error, data, response) {
   if (error) {
     console.error(error);
@@ -78,7 +78,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.getWeatherForecast(callback);
+api.apiSpeechesMetaDataGet(callback);
 ```
 
 ## Documentation for API Endpoints
@@ -87,7 +87,11 @@ All URIs are relative to */*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*WebApi.WeatherForecastApi* | [**getWeatherForecast**](docs/WeatherForecastApi.md#getWeatherForecast) | **GET** /WeatherForecast | 
+*WebApi.SpeechesMetaDataApi* | [**apiSpeechesMetaDataGet**](docs/SpeechesMetaDataApi.md#apiSpeechesMetaDataGet) | **GET** /api/SpeechesMetaData | 
+*WebApi.SpeechesMetaDataApi* | [**apiSpeechesMetaDataIdDelete**](docs/SpeechesMetaDataApi.md#apiSpeechesMetaDataIdDelete) | **DELETE** /api/SpeechesMetaData/{id} | 
+*WebApi.SpeechesMetaDataApi* | [**apiSpeechesMetaDataIdGet**](docs/SpeechesMetaDataApi.md#apiSpeechesMetaDataIdGet) | **GET** /api/SpeechesMetaData/{id} | 
+*WebApi.SpeechesMetaDataApi* | [**apiSpeechesMetaDataIdPut**](docs/SpeechesMetaDataApi.md#apiSpeechesMetaDataIdPut) | **PUT** /api/SpeechesMetaData/{id} | 
+*WebApi.SpeechesMetaDataApi* | [**apiSpeechesMetaDataPost**](docs/SpeechesMetaDataApi.md#apiSpeechesMetaDataPost) | **POST** /api/SpeechesMetaData | 
 
 ## Documentation for Models
 
