@@ -5,6 +5,7 @@ All URIs are relative to */*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**apiSpeechesMetaDataGet**](SpeechesMetaDataApi.md#apiSpeechesMetaDataGet) | **GET** /api/SpeechesMetaData | 
+[**apiSpeechesMetaDataGetTypeOfSpeechesCountListGet**](SpeechesMetaDataApi.md#apiSpeechesMetaDataGetTypeOfSpeechesCountListGet) | **GET** /api/SpeechesMetaData/getTypeOfSpeechesCountList | 
 [**apiSpeechesMetaDataIdDelete**](SpeechesMetaDataApi.md#apiSpeechesMetaDataIdDelete) | **DELETE** /api/SpeechesMetaData/{id} | 
 [**apiSpeechesMetaDataIdGet**](SpeechesMetaDataApi.md#apiSpeechesMetaDataIdGet) | **GET** /api/SpeechesMetaData/{id} | 
 [**apiSpeechesMetaDataIdPut**](SpeechesMetaDataApi.md#apiSpeechesMetaDataIdPut) | **PUT** /api/SpeechesMetaData/{id} | 
@@ -36,6 +37,42 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**[SpeechesMetaData]**](SpeechesMetaData.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+<a name="apiSpeechesMetaDataGetTypeOfSpeechesCountListGet"></a>
+# **apiSpeechesMetaDataGetTypeOfSpeechesCountListGet**
+> [TypeOfSpeechCountDto] apiSpeechesMetaDataGetTypeOfSpeechesCountListGet()
+
+
+
+### Example
+```javascript
+import {WebApi} from 'web_api';
+
+let apiInstance = new WebApi.SpeechesMetaDataApi();
+apiInstance.apiSpeechesMetaDataGetTypeOfSpeechesCountListGet((error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+});
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**[TypeOfSpeechCountDto]**](TypeOfSpeechCountDto.md)
 
 ### Authorization
 

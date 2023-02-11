@@ -1,5 +1,6 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.DTOs;
 using WebApi.Models;
 using WebApi.Services;
 
@@ -14,6 +15,23 @@ namespace WebApi.Controllers
         public SpeechesMetaDataController(SpeechesMetaDataService speechesMetaDataService) =>
             _speechesMetaDataService = speechesMetaDataService;
         
+        [HttpGet]
+        [Route("getTypeOfSpeechesCountList")]
+        public async Task<List<TypeOfSpeechCountDto>> GetTypeOfSpeechesCountList()
+        {
+            var speechesCountList = await _speechesMetaDataService.GetTypeOfSpeechesCountList();
+            // use automapper in the future
+            var result = speechesCountList.Select(x => new TypeOfSpeechCountDto()
+                {
+                    TypeOfSpeech = x.TypeOfSpeech,
+                    Count = x.Count
+                })
+                .OrderBy(x => x.TypeOfSpeech)
+                .ToList();
+
+            return result;
+        }
+
         [HttpGet]
         public async Task<List<SpeechesMetaData>> Get() =>
             await _speechesMetaDataService.GetAsync();

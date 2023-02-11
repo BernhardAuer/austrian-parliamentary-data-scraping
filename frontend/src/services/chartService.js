@@ -9,7 +9,20 @@ export default class ChartService {
         client.basePath = env.PUBLIC_API_URL;
         this.#apiInstance = new SpeechesMetaDataApi(client);
     }
-    fetchSpeechTypes() {}
+    fetchSpeechTypes(callback) {
+        this.#apiInstance.apiSpeechesMetaDataGetTypeOfSpeechesCountListGet((error, data, response) => {
+            if (error) {
+                console.error(error);
+                return null;
+            } else {
+                let parsedData = JSON.stringify(data)
+                console.log('API called successfully. Returned data: ' + parsedData);
+                callback(data);
+            }
+        });
+    }
+
+
     async fetchSpeechMetaData(callback) {
         this.#apiInstance.apiSpeechesMetaDataGet((error, data, response) => {
             if (error) {

@@ -60,6 +60,32 @@
           done();
         });
       });
+      describe('apiSpeechesMetaDataGetTypeOfSpeechesCountListGet', function() {
+        it('should call apiSpeechesMetaDataGetTypeOfSpeechesCountListGet successfully', function(done) {
+          // TODO: uncomment apiSpeechesMetaDataGetTypeOfSpeechesCountListGet call and complete the assertions
+          /*
+
+          instance.apiSpeechesMetaDataGetTypeOfSpeechesCountListGet(function(error, data, response) {
+            if (error) {
+              done(error);
+              return;
+            }
+            // TODO: update response assertions
+            let dataCtr = data;
+            expect(dataCtr).to.be.an(Array);
+            expect(dataCtr).to.not.be.empty();
+            for (let p in dataCtr) {
+              let data = dataCtr[p];
+              expect(data).to.be.a(WebApi.TypeOfSpeechCountDto);
+            }
+
+            done();
+          });
+          */
+          // TODO: uncomment and complete method invocation above, then delete this line and the next:
+          done();
+        });
+      });
       describe('apiSpeechesMetaDataIdDelete', function() {
         it('should call apiSpeechesMetaDataIdDelete successfully', function(done) {
           // TODO: uncomment, update parameter values for apiSpeechesMetaDataIdDelete call

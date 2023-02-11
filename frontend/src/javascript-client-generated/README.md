@@ -88,6 +88,7 @@ All URIs are relative to */*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *WebApi.SpeechesMetaDataApi* | [**apiSpeechesMetaDataGet**](docs/SpeechesMetaDataApi.md#apiSpeechesMetaDataGet) | **GET** /api/SpeechesMetaData | 
+*WebApi.SpeechesMetaDataApi* | [**apiSpeechesMetaDataGetTypeOfSpeechesCountListGet**](docs/SpeechesMetaDataApi.md#apiSpeechesMetaDataGetTypeOfSpeechesCountListGet) | **GET** /api/SpeechesMetaData/getTypeOfSpeechesCountList | 
 *WebApi.SpeechesMetaDataApi* | [**apiSpeechesMetaDataIdDelete**](docs/SpeechesMetaDataApi.md#apiSpeechesMetaDataIdDelete) | **DELETE** /api/SpeechesMetaData/{id} | 
 *WebApi.SpeechesMetaDataApi* | [**apiSpeechesMetaDataIdGet**](docs/SpeechesMetaDataApi.md#apiSpeechesMetaDataIdGet) | **GET** /api/SpeechesMetaData/{id} | 
 *WebApi.SpeechesMetaDataApi* | [**apiSpeechesMetaDataIdPut**](docs/SpeechesMetaDataApi.md#apiSpeechesMetaDataIdPut) | **PUT** /api/SpeechesMetaData/{id} | 
@@ -96,6 +97,7 @@ Class | Method | HTTP request | Description
 ## Documentation for Models
 
  - [WebApi.SpeechesMetaData](docs/SpeechesMetaData.md)
+ - [WebApi.TypeOfSpeechCountDto](docs/TypeOfSpeechCountDto.md)
 
 ## Documentation for Authorization
 

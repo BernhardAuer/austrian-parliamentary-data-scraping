@@ -19,7 +19,20 @@ public class SpeechesMetaDataService
             .GetCollection<SpeechesMetaData>(austrianParliamentScrapeDatabaseSettings.Value.SpeechesMetaDataCollectionName);
         _logger = logger;
     }
-    
+
+    public async Task<List<TypeOfSpeechCount>> GetTypeOfSpeechesCountList()
+    {
+        return await _speechesMetaDataCollection
+            .Aggregate()
+            .SortByCount(x => x.typeOfSpeech)
+            .Project(x => new TypeOfSpeechCount()
+            {
+                TypeOfSpeech = x.Id.ToString(),
+                Count = x.Count
+            })
+            .ToListAsync();
+    }
+
     public async Task<List<SpeechesMetaData>> GetAsync() =>
         await _speechesMetaDataCollection.Find(_ => true).ToListAsync();
 
