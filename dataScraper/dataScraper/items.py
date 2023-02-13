@@ -78,7 +78,6 @@ class SpeechesMetaDataItem(scrapy.Item):
      nameOfSpeaker = scrapy.Field(input_processor = MapCompose(getName, stripString), output_processor = TakeFirst())
      titlePrecedingName = scrapy.Field(input_processor = MapCompose(extractTitles, stripString))
      politicalPartie = scrapy.Field(output_processor = TakeFirst())
-     nrOfSpeechInDebate = scrapy.Field(output_processor = TakeFirst())
      nrOfSpeechByThisPerson = scrapy.Field(output_processor = TakeFirst()) #personSpeechCountInDebate
      typeOfSpeech = scrapy.Field(output_processor = TakeFirst())
      startDateTime = scrapy.Field(input_processor= MapCompose(mergeMeetingDateWithSpeechTime),output_processor = TakeFirst())
@@ -88,4 +87,14 @@ class SpeechesMetaDataItem(scrapy.Item):
      nationalCouncilMeetingTitle = scrapy.Field(output_processor = TakeFirst()) ## ?? really? better use int
      topic = scrapy.Field(output_processor = TakeFirst())
      hasSpeechFinished = scrapy.Field(input_processor= MapCompose(parseHasSpeechedFinishProperty), output_processor = TakeFirst())
+     speechNrInDebate = scrapy.Field(output_processor = TakeFirst())
+     externalPersonId = scrapy.Field(output_processor = TakeFirst())
+     parsingDatetime = scrapy.Field(output_processor = TakeFirst())
+     meetingNr = scrapy.Field(output_processor = TakeFirst())
+     legislature = scrapy.Field(output_processor = TakeFirst())
+     meetingType = scrapy.Field(output_processor = TakeFirst())
+     lastEditBySource = scrapy.Field(input_processor = MapCompose(parseDate), output_processor = TakeFirst())
+     meetingDate = scrapy.Field(output_processor = TakeFirst())
+     topNr = scrapy.Field(output_processor = TakeFirst())
+     typeOfDebate = scrapy.Field(output_processor = TakeFirst())
      pass
