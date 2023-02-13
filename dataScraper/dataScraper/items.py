@@ -84,9 +84,9 @@ class SpeechesMetaDataItem(scrapy.Item):
      timeLimitInSec = scrapy.Field(input_processor= MapCompose(convertTimeLimitInMinToSec), output_processor = TakeFirst())
      isVoluntaryTimeLimit = scrapy.Field(input_processor= MapCompose(parseIsVoluntaryTimeLimitProperty), output_processor = TakeFirst())
      lengthOfSpeechInSec = scrapy.Field(input_processor= MapCompose(convertTimeStringToIntInSec), output_processor = TakeFirst())
+     hasSpeechFinished = scrapy.Field(input_processor= MapCompose(parseHasSpeechedFinishProperty), output_processor = TakeFirst())
      nationalCouncilMeetingTitle = scrapy.Field(output_processor = TakeFirst()) ## ?? really? better use int
      topic = scrapy.Field(output_processor = TakeFirst())
-     hasSpeechFinished = scrapy.Field(input_processor= MapCompose(parseHasSpeechedFinishProperty), output_processor = TakeFirst())
      speechNrInDebate = scrapy.Field(output_processor = TakeFirst())
      externalPersonId = scrapy.Field(output_processor = TakeFirst())
      parsingDatetime = scrapy.Field(output_processor = TakeFirst())
