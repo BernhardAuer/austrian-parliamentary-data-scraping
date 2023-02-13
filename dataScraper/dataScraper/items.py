@@ -8,6 +8,7 @@ from dateutil.parser import parse
 from itemloaders.processors import MapCompose, TakeFirst
 from datetime import datetime
 from dataclasses import dataclass, field
+from validTitlesList import validTitles
 
 def parseDate(dateString):
      dateTime = parse(dateString).replace(microsecond=0) # this replace shitty thing is needed for mongodb (js dates only, huh)
@@ -17,7 +18,7 @@ def stripString(value):
      return value.strip()
 
 class NationalCouncilMeetingItem(scrapy.Item):
-     name = scrapy.Field(output_processor = TakeFirst()) # 199. Sitzung
+     name = scrapy.Field(input_processor = MapCompose(stripString), output_processor = TakeFirst()) # 199. Sitzung
      date = scrapy.Field(input_processor = MapCompose(parseDate), output_processor = TakeFirst()) # 20230201
      legislativePeriod  = scrapy.Field(output_processor = TakeFirst()) # XXVII
      meetingType = scrapy.Field(output_processor = TakeFirst()) # NRSTIZ or ...
@@ -55,9 +56,28 @@ def mergeMeetingDateWithSpeechTime(value, loader_context):
      (hour, minute) = value.split(":")
      speechDatetime = meetingDate.replace(hour=int(hour), minute=int(minute))
      return speechDatetime
-     
+
+def getTitlesAndPureName(value):
+     parsedTitles = []
+     for title in validTitles: # list order is important, eg. because of Mag. and Mag. (FH)
+          if title + ' ' in value or value.endswith(title): # whitespace or end of line...
+               parsedTitles.append(title)
+               value = value.replace(title, '')
+     return (parsedTitles, value)
+
+def getName(value):
+     (parsedTitles, name) = getTitlesAndPureName(value)
+     return name
+
+def extractTitles(value):
+     (parsedTitles, name) = getTitlesAndPureName(value)
+     return parsedTitles
+
 class SpeechesMetaDataItem(scrapy.Item):
-     nameOfSpeaker = scrapy.Field(output_processor = TakeFirst())
+     titleBeforeName = scrapy.Field(input_processor = MapCompose(extractTitles, stripString)) # todo: "parlaments"titel wie BM usw.
+     nameOfSpeaker = scrapy.Field(input_processor = MapCompose(getName, stripString), output_processor = TakeFirst())
+     titlePrecedingName = scrapy.Field(input_processor = MapCompose(extractTitles, stripString))
+     politicalPartie = scrapy.Field(output_processor = TakeFirst())
      nrOfSpeechInDebate = scrapy.Field(output_processor = TakeFirst())
      nrOfSpeechByThisPerson = scrapy.Field(output_processor = TakeFirst()) #personSpeechCountInDebate
      typeOfSpeech = scrapy.Field(output_processor = TakeFirst())
