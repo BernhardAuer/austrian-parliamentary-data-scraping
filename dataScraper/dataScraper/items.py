@@ -9,6 +9,7 @@ from itemloaders.processors import MapCompose, TakeFirst
 from datetime import datetime
 from dataclasses import dataclass, field
 from validTitlesList import validTitles
+from jmespath import search
 
 def parseDate(dateString):
      dateTime = parse(dateString).replace(microsecond=0) # this replace shitty thing is needed for mongodb (js dates only, huh)
@@ -73,6 +74,26 @@ def extractTitles(value):
      (parsedTitles, name) = getTitlesAndPureName(value)
      return parsedTitles
 
+def matchAndParseDataFromProtocol(value, loader_context):
+     speechesInProtocol = loader_context.get('speechesInProtocol')
+     url = search('[*][?contains(texta, \''+ value +'\')]', speechesInProtocol)[0] # todo: use i 
+     return url
+
+def parseVideoUrl(value, loader_context):
+     speechData = matchAndParseDataFromProtocol(value, loader_context)
+     videoUrl = search('[*].video', speechData)
+     return videoUrl 
+
+def parseSpeechUrl(value, loader_context):
+     speechData = matchAndParseDataFromProtocol(value, loader_context)
+     url = search('[*].filename', speechData)
+     return url 
+
+def parseSpeechTimeFromProtocol(value, loader_context):
+     speechData = matchAndParseDataFromProtocol(value, loader_context)
+     time = search('[*].time', speechData)
+     return time 
+
 class SpeechesMetaDataItem(scrapy.Item):
      titleBeforeName = scrapy.Field(input_processor = MapCompose(extractTitles, stripString)) # todo: "parlaments"titel wie BM usw.
      nameOfSpeaker = scrapy.Field(input_processor = MapCompose(getName, stripString), output_processor = TakeFirst())
@@ -97,4 +118,7 @@ class SpeechesMetaDataItem(scrapy.Item):
      meetingDate = scrapy.Field(output_processor = TakeFirst())
      topNr = scrapy.Field(output_processor = TakeFirst())
      typeOfDebate = scrapy.Field(output_processor = TakeFirst())
+     videoUrl = scrapy.Field(input_processor = MapCompose(getName, stripString, parseVideoUrl), output_processor = TakeFirst())
+     speechUrl= scrapy.Field(input_processor = MapCompose(getName, stripString, parseSpeechUrl), output_processor = TakeFirst())
+     speechTimeProtocol = scrapy.Field(input_processor = MapCompose(getName, stripString, parseSpeechTimeFromProtocol), output_processor = TakeFirst())
      pass

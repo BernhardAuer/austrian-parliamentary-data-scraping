@@ -27,12 +27,15 @@ class SpeechesMetaDataSpider(scrapy.Spider):
             topic = search('text', singleDebate)
             topNr = search('top', singleDebate)
             typeOfDebate = search('type', singleDebate)
+            speechesInProtocol = None
+            if topNr is not None:
+                speechesInProtocol = search('content[].progress[?starts_with(text, \'' + topNr + ' \' )].speeches[]', jsonAsPythonObject) 
 
             speeches = search('speeches', singleDebate)
             for singleSpeech in speeches:
                 isVoluntaryTimeLimit = singleSpeech[9] if singleSpeech[9] != None else 'unfreiwillig lol' # quick fix, there must be a better solution for null values
 
-                l = ItemLoader(item=SpeechesMetaDataItem(), meetingDate = meetingDate, selector=singleSpeech)      
+                l = ItemLoader(item=SpeechesMetaDataItem(), meetingDate = meetingDate, speechesInProtocol = speechesInProtocol, selector=singleSpeech)      
 
                 l.add_value('titleBeforeName', singleSpeech[2], re='^([^,]*),?.*\(.+\)$') # needs extra parsing ...
                 l.add_value('nameOfSpeaker', singleSpeech[2], re='^([^,]*),?.*\(.+\)$') # needs extra parsing ...
@@ -56,7 +59,11 @@ class SpeechesMetaDataSpider(scrapy.Spider):
                 l.add_value('externalPersonId', singleSpeech[3]) 
                 l.add_value('lastEditBySource', lastEditBySource)
                 l.add_value('parsingDatetime',  datetime.now()) 
-                
+                l.add_value('videoUrl', singleSpeech[2], re='^([^,]*),?.*\(.+\)$')
+                l.add_value('speechUrl',  singleSpeech[2], re='^([^,]*),?.*\(.+\)$') 
+                l.add_value('speechTimeProtocol',  singleSpeech[2], re='^([^,]*),?.*\(.+\)$') 
+
+
                 yield l.load_item()
         
 
