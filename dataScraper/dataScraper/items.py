@@ -76,22 +76,42 @@ def extractTitles(value):
 
 def matchAndParseDataFromProtocol(value, loader_context):
      speechesInProtocol = loader_context.get('speechesInProtocol')
-     url = search('[*][?contains(texta, \''+ value +'\')]', speechesInProtocol)[0] # todo: use i 
+     nrOfSpeechByThisPerson = loader_context.get('nrOfSpeechByThisPerson')
+     url = search('[*][?contains(texta, \''+ value +'\')][]', speechesInProtocol)[nrOfSpeechByThisPerson]
+
      return url
 
+def giveMeError(value, loader_context):
+     speechesInProtocol = loader_context.get('speechesInProtocol')
+     nrOfSpeechByThisPerson = loader_context.get('nrOfSpeechByThisPerson')
+
+     return speechesInProtocol
+
 def parseVideoUrl(value, loader_context):
-     speechData = matchAndParseDataFromProtocol(value, loader_context)
-     videoUrl = search('[*].video', speechData)
+     try:
+          speechData = matchAndParseDataFromProtocol(value, loader_context)
+          videoUrl = search('video', speechData)
+     except:
+          print('parsing error')
+          return [None]
      return videoUrl 
 
 def parseSpeechUrl(value, loader_context):
-     speechData = matchAndParseDataFromProtocol(value, loader_context)
-     url = search('[*].filename', speechData)
+     try:
+          speechData = matchAndParseDataFromProtocol(value, loader_context)
+          url = search('filename', speechData)     
+     except:
+          print('parsing error')
+          return [None]
      return url 
 
 def parseSpeechTimeFromProtocol(value, loader_context):
-     speechData = matchAndParseDataFromProtocol(value, loader_context)
-     time = search('[*].time', speechData)
+     try:
+          speechData = matchAndParseDataFromProtocol(value, loader_context)
+          time = search('time', speechData)
+     except:
+          print('parsing error')
+          return [None]
      return time 
 
 class SpeechesMetaDataItem(scrapy.Item):
