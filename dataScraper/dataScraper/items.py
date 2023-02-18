@@ -58,6 +58,16 @@ def mergeMeetingDateWithSpeechTime(value, loader_context):
      speechDatetime = meetingDate.replace(hour=int(hour), minute=int(minute))
      return speechDatetime
 
+def mergeMeetingDateWithSpeechTimeSeconds(value, loader_context):
+     if value is None:
+          return None
+     # value: hh:mm:ss (time in 24h format)
+     meetingDate = loader_context.get('meetingDate')
+     meetingDate = parse(meetingDate[0])
+     (hour, minute, second) = value.split(":")
+     speechDatetime = meetingDate.replace(hour=int(hour), minute=int(minute), second=int(second))
+     return speechDatetime
+
 def getTitlesAndPureName(value):
      parsedTitles = []
      for title in validTitles: # list order is important, eg. because of Mag. and Mag. (FH)
@@ -140,5 +150,5 @@ class SpeechesMetaDataItem(scrapy.Item):
      typeOfDebate = scrapy.Field(output_processor = TakeFirst())
      videoUrl = scrapy.Field(input_processor = MapCompose(getName, stripString, parseVideoUrl), output_processor = TakeFirst())
      speechUrl= scrapy.Field(input_processor = MapCompose(getName, stripString, parseSpeechUrl), output_processor = TakeFirst())
-     speechTimeProtocol = scrapy.Field(input_processor = MapCompose(getName, stripString, parseSpeechTimeFromProtocol), output_processor = TakeFirst())
+     speechTimeProtocol = scrapy.Field(input_processor = MapCompose(getName, stripString, parseSpeechTimeFromProtocol, mergeMeetingDateWithSpeechTimeSeconds), output_processor = TakeFirst())
      pass
