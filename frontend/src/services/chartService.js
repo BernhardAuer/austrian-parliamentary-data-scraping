@@ -9,12 +9,22 @@ export default class ChartService {
         client.basePath = env.PUBLIC_API_URL;
         this.#apiInstance = new SpeechesMetaDataApi(client);
     }
-    fetchSpeechTypes(callback) {
-        this.#apiInstance.apiSpeechesMetaDataGetTypeOfSpeechesCountListGet((error, data, response) => {
+    fetchSpeechTypes(selectedLegislatur, selectedMeetingNumber, inputTopNumber, selectedPoliticalParties, callback) {
+        let options = {
+            legislature:selectedLegislatur,
+            meetingNumber: selectedMeetingNumber,
+            topNumber: inputTopNumber,
+            politicalParty: selectedPoliticalParties
+        }
+        console.log("wenigstens die scheisse soll funktionierne")
+        this.#apiInstance.apiSpeechesMetaDataGetTypeOfSpeechesCountListGet(options, (error, data, response) => {
+            console.log("??")
             if (error) {
+                console.error("api call failed.")
                 console.error(error);
                 return null;
             } else {
+                console.log("api call sucess.")
                 let parsedData = JSON.stringify(data)
                 console.log('API called successfully. Returned data: ' + parsedData);
                 callback(data);

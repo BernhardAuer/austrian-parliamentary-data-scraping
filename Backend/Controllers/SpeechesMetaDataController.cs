@@ -17,9 +17,9 @@ namespace WebApi.Controllers
         
         [HttpGet]
         [Route("getTypeOfSpeechesCountList")]
-        public async Task<List<TypeOfSpeechCountDto>> GetTypeOfSpeechesCountList()
+        public async Task<List<TypeOfSpeechCountDto>> GetTypeOfSpeechesCountList([FromQuery] TypeOfSpeechFilterDto typeOfSpeechFilterDto)
         {
-            var speechesCountList = await _speechesMetaDataService.GetTypeOfSpeechesCountList();
+            var speechesCountList = await _speechesMetaDataService.GetTypeOfSpeechesCountList(typeOfSpeechFilterDto);
             // use automapper in the future
             var result = speechesCountList.Select(x => new TypeOfSpeechCountDto()
                 {
