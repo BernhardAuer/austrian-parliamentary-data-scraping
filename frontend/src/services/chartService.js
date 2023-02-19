@@ -10,11 +10,15 @@ export default class ChartService {
         this.#apiInstance = new SpeechesMetaDataApi(client);
     }
     fetchSpeechTypes(callback) {
-        this.#apiInstance.apiSpeechesMetaDataGetTypeOfSpeechesCountListGet((error, data, response) => {
+        console.log("wenigstens die scheisse soll funktionierne")
+        this.#apiInstance.apiSpeechesMetaDataGetTypeOfSpeechesCountListGet(null, (error, data, response) => {
+            console.log("??")
             if (error) {
+                console.error("api call failed.")
                 console.error(error);
                 return null;
             } else {
+                console.error("api call sucess.")
                 let parsedData = JSON.stringify(data)
                 console.log('API called successfully. Returned data: ' + parsedData);
                 callback(data);

@@ -49,7 +49,7 @@ No authorization required
 
 <a name="apiSpeechesMetaDataGetTypeOfSpeechesCountListGet"></a>
 # **apiSpeechesMetaDataGetTypeOfSpeechesCountListGet**
-> [TypeOfSpeechCountDto] apiSpeechesMetaDataGetTypeOfSpeechesCountListGet()
+> [TypeOfSpeechCountDto] apiSpeechesMetaDataGetTypeOfSpeechesCountListGet(opts)
 
 
 
@@ -58,7 +58,13 @@ No authorization required
 import {WebApi} from 'web_api';
 
 let apiInstance = new WebApi.SpeechesMetaDataApi();
-apiInstance.apiSpeechesMetaDataGetTypeOfSpeechesCountListGet((error, data, response) => {
+let opts = { 
+  'politicalParty': ["politicalParty_example"], // [String] | 
+  'legislature': "legislature_example", // String | 
+  'meetingNumber': 56, // Number | 
+  'topNumber': "topNumber_example" // String | 
+};
+apiInstance.apiSpeechesMetaDataGetTypeOfSpeechesCountListGet(opts, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -68,7 +74,13 @@ apiInstance.apiSpeechesMetaDataGetTypeOfSpeechesCountListGet((error, data, respo
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **politicalParty** | [**[String]**](String.md)|  | [optional] 
+ **legislature** | **String**|  | [optional] 
+ **meetingNumber** | **Number**|  | [optional] 
+ **topNumber** | **String**|  | [optional] 
 
 ### Return type
 

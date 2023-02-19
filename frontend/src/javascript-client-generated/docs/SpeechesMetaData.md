@@ -15,3 +15,7 @@ Name | Type | Description | Notes
 **nationalCouncilMeetingTitle** | **String** |  | [optional] 
 **topic** | **String** |  | [optional] 
 **hasSpeechFinished** | **Boolean** |  | [optional] 
+**politicalPartie** | **String** |  | [optional] 
+**topNr** | **String** |  | [optional] 
+**meetingNr** | **Number** |  | [optional] 
+**legislature** | **String** |  | [optional] 
