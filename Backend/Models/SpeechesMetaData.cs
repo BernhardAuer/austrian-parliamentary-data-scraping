@@ -21,4 +21,9 @@ public class SpeechesMetaData
     public string? topic { get; set; }
     public bool hasSpeechFinished { get; set; }
     
+    public string politicalPartie { get; set; }
+    public string topNr { get; set; }
+    public int? meetingNr { get; set; }
+    public string legislature { get; set; }
+    
 }
