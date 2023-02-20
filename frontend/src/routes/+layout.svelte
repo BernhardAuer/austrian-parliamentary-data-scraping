@@ -76,4 +76,8 @@
 	</div>
 </div>
 
-<slot />
+<div class="mx-4">
+    <div class="container mx-auto">
+	    <slot />
+    </div>
+</div>
